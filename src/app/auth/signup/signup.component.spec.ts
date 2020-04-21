@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignupComponent } from './signup.component';
+import { MatchPassword } from '../validators/match-password';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -8,7 +9,7 @@ describe('SignupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignupComponent ]
+      declarations: [ SignupComponent, MatchPassword ]
     })
     .compileComponents();
   }));
