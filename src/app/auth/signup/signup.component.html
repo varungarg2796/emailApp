@@ -13,6 +13,9 @@
         <p *ngIf= "authForm.errors.passwordsDontMatch">
             Password and password confirmation must match
         </p>
+        <p *ngIf= "authForm.errors.noConnection">
+            NO internet connection
+        </p>
     </div>
 
     <div>
