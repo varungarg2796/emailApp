@@ -10,10 +10,15 @@ export class InputComponent implements OnInit {
 
   @Input() label: string;
   @Input() control: FormControl;
-  
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showErrors() {
+    const { dirty, touched, errors } = this.control;
+    return dirty && touched && errors;
   }
 
 }
