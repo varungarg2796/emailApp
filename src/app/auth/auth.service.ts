@@ -29,7 +29,7 @@ export class AuthService {
 
   usernameAvailable( username: string) {
     return this.http.post<UserNameAvailableResponse>(this.rootUrl + '/auth/username', {
-      username
+      username,
    });
   }
 
@@ -48,6 +48,6 @@ export class AuthService {
       tap( response => {
         console.log(response);
       })
-    )
+    );
   }
 }
