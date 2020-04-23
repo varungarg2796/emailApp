@@ -20,6 +20,11 @@ interface SignedInResponse {
   authenticated: boolean;
   username: string;
 }
+
+interface SignInCredentials {
+  username: string;
+  password: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -59,6 +64,15 @@ export class AuthService {
     return this.http.get<SignedInResponse>(this.rootUrl + '/auth/signedin').pipe(
       tap( ({authenticated}) => {
         this.signedin$.next(authenticated);
+      })
+    );
+  }
+
+  signin(credentials: SignInCredentials) {
+    return this.http.post(this.rootUrl + '/auth/signin', credentials)
+    .pipe(
+      tap( () => { // if we have any error returned from the service, it will skip tap
+        this.signedin$.next(true);
       })
     );
   }
