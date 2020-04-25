@@ -32,7 +32,7 @@ interface SignInCredentials {
 export class AuthService {
 
   rootUrl = 'https://api.angular-email.com';
-  signedin$ = new BehaviorSubject(false); // $ sign to denote it is observable
+  signedin$ = new BehaviorSubject(null); // $ sign to denote it is observable
 
   constructor(private http: HttpClient) { }
 
