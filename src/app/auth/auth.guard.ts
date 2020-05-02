@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Route, RouterStateSnapshot, UrlSegment, UrlTree, CanLoad, Router } from '@angular/router';
+import {  Route, UrlSegment, CanLoad, Router } from '@angular/router';
 import { Observable, Subscriber } from 'rxjs';
 import { AuthService } from './auth.service';
 import { take, skipWhile, tap } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class AuthGuard implements CanLoad  {
 
     return this.authService.signedin$.pipe(
       skipWhile( value => value === null), // I don't care about values which is null
-      take(1), // taking one value which satisfies skipWhile
+      take(1), // taking one value which satisfies skipWhile i.e value which is not null
       tap( (isSignedIn) => {
         if (!isSignedIn) {
           this.router.navigateByUrl('/');
