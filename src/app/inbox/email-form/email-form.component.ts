@@ -27,7 +27,6 @@ export class EmailFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('fired')
     if (this.emailForm.invalid) {
       return;
     }
