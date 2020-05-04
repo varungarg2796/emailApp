@@ -21,6 +21,10 @@ interface SignedInResponse {
   username: string;
 }
 
+interface SigninResponse {
+  username: string;
+}
+
 interface SignInCredentials {
   username: string;
   password: string;
@@ -33,6 +37,7 @@ export class AuthService {
 
   rootUrl = 'https://api.angular-email.com';
   signedin$ = new BehaviorSubject(null); // $ sign to denote it is observable
+  username = '';
 
   constructor(private http: HttpClient) { }
 
@@ -46,8 +51,9 @@ export class AuthService {
     return this.http.post<SignUpResponse>(this.rootUrl + '/auth/signup',
       credentials
     ).pipe(
-      tap( () => {
+      tap( ({username}) => {
         this.signedin$.next(true);
+        this.username = username;
       })
     );
   }
@@ -62,17 +68,19 @@ export class AuthService {
 
   checkSignedIn() {
     return this.http.get<SignedInResponse>(this.rootUrl + '/auth/signedin').pipe(
-      tap( ({authenticated}) => {
+      tap( ({authenticated, username}) => {
         this.signedin$.next(authenticated);
+        this.username = username;
       })
     );
   }
 
   signin(credentials: SignInCredentials) {
-    return this.http.post(this.rootUrl + '/auth/signin', credentials)
+    return this.http.post<SigninResponse>(this.rootUrl + '/auth/signin', credentials)
     .pipe(
-      tap( () => { // if we have any error returned from the service, it will skip tap
+      tap( ({username}) => { // if we have any error returned from the service, it will skip tap
         this.signedin$.next(true);
+        this.username = username;
       })
     );
   }
