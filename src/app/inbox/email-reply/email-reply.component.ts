@@ -16,7 +16,11 @@ export class EmailReplyComponent implements OnChanges {
 
 
   ngOnChanges() {
-    const text = this.email.text.replace(/\n/gi, '\n> ') || ''; // replace every new line in text with >
+    let text = '';
+    if (this.email.text) {
+       text = this.email.text.replace(/\n/gi, '\n> ') || ''; // replace every new line in text with >
+    }
+    console.log(text);
     this.email = {  // WOW! Really neat way to swap fields!
       ...this.email,
       from: this.email.to,
