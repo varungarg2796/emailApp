@@ -5,5 +5,5 @@
 
 <app-modal (dismiss)="showModal = false" *ngIf="showModal">
     <h3 modalTitle>Compose</h3>
-    <app-email-form [email]="email"></app-email-form>
+    <app-email-form (emailSubmit) ="onSubmit($event)" [email]="email"></app-email-form>
 </app-modal>
